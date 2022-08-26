@@ -10,7 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: state,
     getters: getters,
-  mutations: mutations,
+    mutations: mutations,
   actions: actions,
     modules: {},
 });

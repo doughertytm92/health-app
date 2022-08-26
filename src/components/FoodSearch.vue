@@ -1,56 +1,72 @@
 <template>
   <div class="hello">
-    <b-field><b-input v-model="foodName" placeholder="Enter Food..." @keydown.enter="foodSearch"></b-input><b-button @click="foodSearch">Search</b-button></b-field>
-    <b-field v-if="serving">Serving Size: {{ serving.size }}{{ serving.unit }}</b-field>
-    <b-table v-if="nutrients.length > 0" :data="nutrients" :columns="columns"></b-table>
+    <b-field
+      ><b-input
+        v-model="foodName"
+        placeholder="Enter Food..."
+        @keydown.enter="foodSearch"
+      ></b-input
+      ><b-button @click="foodSearch">Search</b-button></b-field
+    >
+    <b-field v-if="serving"
+      >Serving Size: {{ serving.size }}{{ serving.unit }}</b-field
+    >
+    <b-table
+      v-if="nutrients.length > 0"
+      :data="nutrients"
+      :columns="columns"
+    ></b-table>
   </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: "FoodSearch",
-  props: {
-    msg: String,
-  },
+    props: {
+        msg: String,
+    },
   data() {
     return {
       serving: null,
       nutrients: [],
-      foodName: '',
-      columns: [
-        {
-          field: 'nutrientId',
-          label: 'ID',
-          width: '40',
-          numeric: true
+      foodName: "",
+            columns: [
+                {
+          field: "nutrientId",
+          label: "ID",
+          width: "40",
+          numeric: true,
+                },
+                {
+          field: "nutrientName",
+                    label: 'Nutrient',
         },
         {
-          field: 'nutrientName',
-          label: 'Nutrient',
-        },
+          field: "value",
+          label: "Value",
+                    numeric: true,
+                },
         {
-          field: 'value',
-          label: 'Value',
-          numeric: true
+                    field: "unitName",
+          label: "Unit",
         },
-        {
-          field: 'unitName',
-          label: 'Unit',
-        }
       ],
     };
   },
-  methods: {
+    methods: {
     async foodSearch() {
-      const food = await getFoodData(this.foodName);
-      this.nutrients = food.foods[0].foodNutrients;
-      this.serving = { size: food.foods[0].servingSize, unit: food.foods[0].servingSizeUnit  }
-    },
+            const food = await getFoodData(this.foodName);
+            this.nutrients = food.foods[0].foodNutrients;
+            this.serving = {
+                size: food.foods[0].servingSize,
+        unit: food.foods[0].servingSizeUnit,
+            };
+        },
   },
   mounted() {
-    this.gettingFoodData;
+        this.gettingFoodData;
   },
 };
 </script>

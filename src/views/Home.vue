@@ -11,7 +11,7 @@ import FoodSearch from "@/components/FoodSearch.vue";
 
 export default {
   name: "Home",
-  components: {
+    components: {
     FoodSearch,
   },
 };
