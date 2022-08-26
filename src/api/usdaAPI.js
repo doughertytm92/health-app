@@ -1,16 +1,16 @@
-// const usdaKey = "jTo6QiF6HsRw2nG0SbvPtwTK8e7sA8ZzoiEmisUN";
-// const usdaBaseURL = "https://api.nal.usda.gov/fdc/v1/foods/";
-// const food = "quinoa";
+const token = "jTo6QiF6HsRw2nG0SbvPtwTK8e7sA8ZzoiEmisUN";
+const baseUrl = 'https://api.nal.usda.gov/fdc/v1//foods/';
 
-async function getFoodData(food = "quinoa") {
-  let url =
-    "https://api.nal.usda.gov/fdc/v1//foods/search?query=" +
-    food +
-    "&pageSize=1&api_key=jTo6QiF6HsRw2nG0SbvPtwTK8e7sA8ZzoiEmisUN";
-  let response = await fetch(url);
-  let data = await response.json();
-  console.log(data);
-  return data;
+async function foodQuery(food, results = 10, resource = 'search?query=') {
+    let url =
+    baseUrl + resource + food + '&pageSize=' + results + '&api_key=' + token;
+    try {
+    let response = await fetch(url);
+        return await response.json();
+  } catch (e) {
+        console.error(e);
+        return { error: e };
+    }
 }
 
-export default getFoodData;
+export default foodQuery;
